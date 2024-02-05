@@ -1,4 +1,7 @@
 "use strict";
+import Horse from "./Horse.js";
+
+const horseArray = [];
 
 let btnEdit = document.querySelector(".btnEdit");
 let isEditing = false;
@@ -67,3 +70,38 @@ function saveHorses() {
 
     isEditing = false;
 }
+
+function getHorses() {
+    fetch("http://localhost:3000/getHorses")
+        .then((result) => result.json())
+        .then((res) => {
+            console.log(res);
+            res.forEach((e) => {
+                const horse = new Horse(
+                    e._id,
+                    e.Nom,
+                    e.Ecurie,
+                    e.Dernier_Parage,
+                    e.Prochain_Parage,
+                    e.Paré
+                );
+                horseArray.push(horse);
+            }); 
+            console.log(horseArray);
+            renderTable();
+        });
+       
+        
+}
+
+function renderTable(){
+
+    const table = document.querySelector("#myTable")
+    console.log(table);
+    horseArray.forEach(horse => {
+        table.insertAdjacentHTML('beforeend',horse.htmlString)
+    })
+    
+}
+
+getHorses();
