@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #F4F4F4
+}
+
+.navbar {
+    background-color: #0046E6;
+    padding: 15px 100px;
+    display: flex;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-style: normal;
+    font-size: 28px;
+    color: snow;
+    text-align: left;
+    box-sizing: border-box;
+    margin-right: 30px;
+}
+
+.navbar a:hover{
+    text-decoration: underline;
+}
+
+#active{
+    text-decoration: underline; 
+}
+
+.containerToDo {
+    padding: 30px 100px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    color: #1B1B1E;
+    border-radius: 20px;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 10px 20px;  
+    font-size: 20px;
+    
+}
+
+tr:nth-child(1){
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+tr:nth-child(even) {
+    background-color: #F2F6FC;
+    
+  }
+
+  tr:nth-child(odd) {
+    background-color: white;
+  }
+
+
+.btnSave {
+    border: #0046E6 1px solid;
+    padding: 15px 30px;
+    background-color: snow;
+    width: fit-content;
+    color: #1B1B1E;
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.btnSave:hover{
+    color: snow;
+    background-color: #0046E6;
+    cursor: pointer;
+}
