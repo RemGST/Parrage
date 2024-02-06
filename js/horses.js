@@ -82,8 +82,8 @@ function getHorses() {
             res.forEach((e) => {
                 console.log();
 
-                const dernierParage = e.Dernier_Parage.slice(0, 10);
-                const prochainParage = e.Prochain_Parage.slice(0, 10);
+                const dernierParage = e.Dernier_Parage;
+                const prochainParage = e.Prochain_Parage;
 
                 const horse = new Horse(
                     e._id,
@@ -141,21 +141,57 @@ function addHorse() {
             </tr>
             <tr  class="tableRow">
         <td>
-            <input type="text">
+            <input class="name" type="text" required>
         </td>
         <td>
-        <input type="text">
+        <input class="stable" type="text" required>
         </td>
         <td>
-        <input type="date">
+        <input class="lastTrim" type="date" required>
         </td>
         <td>
-        <input type="date">
+        <input class="nextTrim" type="date" required>
         </td>
     </tr>
         </table>
+
+        <a class="btnSend">Ajouter</a>
     `
     );
+
+    const btnSend = document.querySelector(".btnSend")
+    btnSend.addEventListener("click", () => {
+        console.log("click");
+
+        const horse = {
+            Nom: document.querySelector('.name').value,
+            Ecurie: document.querySelector('.stable').value,
+            Dernier_Parage: document.querySelector('.lastTrim').value,
+            Prochain_Parage: document.querySelector('.nextTrim').value,
+            Paré: false
+        }
+
+        console.log(JSON.stringify(horse));
+
+
+        fetch("http://localhost:3000/addHorses", {
+            method: "POST",
+            body: JSON.stringify(horse),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+    
+            if (data.status === "Saved") {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+    })
 }
 
 getHorses();

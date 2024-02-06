@@ -65,7 +65,7 @@ tr {
   
 
 
-.btnEdit, .btnSave, .btnAdd {
+.btnEdit, .btnSave, .btnAdd, .btnSend {
     border: #0046E6 1px solid;
     background-color: white;
     color: #1B1B1E;
@@ -75,7 +75,7 @@ tr {
     margin-left: 20px;
 }
 
-.btnEdit:hover, .btnSave:hover, .btnAdd:hover{
+.btnEdit:hover, .btnSave:hover, .btnAdd:hover, .btnSend:hover{
     color: snow;
     background-color: #0046E6;
     cursor: pointer;
