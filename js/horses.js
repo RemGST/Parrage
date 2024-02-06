@@ -6,6 +6,9 @@ const horseArray = [];
 let btnEdit = document.querySelector(".btnEdit");
 let isEditing = false;
 
+const btnAdd = document.querySelector(".btnAdd");
+btnAdd.addEventListener("click", addHorse);
+
 btnEdit.addEventListener("click", toggleEditSave);
 
 function toggleEditSave() {
@@ -31,12 +34,12 @@ function editHorses() {
         e.disabled = false;
     });
 
-    const doneBtn = document.querySelectorAll("#doneBtn");
+    const doneBtn = document.querySelectorAll("#btnDone");
     doneBtn.forEach((e) => {
         e.disabled = false;
     });
 
-    btnEdit.innerHTML = "Save";
+    btnEdit.innerHTML = "Sauvegarder";
     btnEdit.classList.remove("btnEdit");
     btnEdit.classList.add("btnSave");
 
@@ -59,12 +62,12 @@ function saveHorses() {
         e.disabled = true;
     });
 
-    const doneBtn = document.querySelectorAll("#doneBtn");
+    const doneBtn = document.querySelectorAll("#btnDone");
     doneBtn.forEach((e) => {
         e.disabled = true;
     });
 
-    btnEdit.innerHTML = "Edit";
+    btnEdit.innerHTML = "Modifier";
     btnEdit.classList.remove("btnSave");
     btnEdit.classList.add("btnEdit");
 
@@ -77,37 +80,82 @@ function getHorses() {
         .then((res) => {
             console.log(res);
             res.forEach((e) => {
-
                 console.log();
 
-                const dernierParage = e.Dernier_Parage.slice(0,10)
-                const prochainParage = e.Prochain_Parage.slice(0,10) 
+                const dernierParage = e.Dernier_Parage.slice(0, 10);
+                const prochainParage = e.Prochain_Parage.slice(0, 10);
 
                 const horse = new Horse(
                     e._id,
                     e.Nom,
                     e.Ecurie,
                     dernierParage,
-                   prochainParage,
+                    prochainParage,
                     e.Paré
                 );
                 horseArray.push(horse);
-            }); 
+            });
             console.log(horseArray);
             renderTable();
         });
-       
-        
 }
 
-function renderTable(){
+function renderTable() {
+    const table = document.querySelector("#myTable");
+    horseArray.forEach((horse) => {
+        table.insertAdjacentHTML(
+            "beforeend",
+            `
+        <tr>
+            <td>
+                ${horse.name}
+            </td>
+            <td>
+                ${horse.stable}
+            </td>
+            <td>
+            <input id="date" type="date" value="${horse.lastTrim}" disabled>
+            </td>
+            <td>
+            <input id="date" type="date" value="${horse.nextTrim}" disabled>
+            </td>
+            <td>
+                <input id="btnDone" type="checkbox" disabled>
+            </td>
+        </tr>`
+        );
+    });
+}
 
-    const table = document.querySelector("#myTable")
-    console.log(table);
-    horseArray.forEach(horse => {
-        table.insertAdjacentHTML('beforeend',horse.htmlString)
-    })
-    
+function addHorse() {
+    const addHorseContainer = document.querySelector(".addHorseContainer");
+    addHorseContainer.insertAdjacentHTML(
+        "beforeend",
+        `
+    <table id="myTable">
+            <tr class="tableRow">
+                <th>Nom</th>
+                <th>Écurie</th>
+                <th>Dernier parage</th>
+                <th>Prochain parage</th>
+            </tr>
+            <tr  class="tableRow">
+        <td>
+            <input type="text">
+        </td>
+        <td>
+        <input type="text">
+        </td>
+        <td>
+        <input type="date">
+        </td>
+        <td>
+        <input type="date">
+        </td>
+    </tr>
+        </table>
+    `
+    );
 }
 
 getHorses();
