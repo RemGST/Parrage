@@ -77,12 +77,18 @@ function getHorses() {
         .then((res) => {
             console.log(res);
             res.forEach((e) => {
+
+                console.log();
+
+                const dernierParage = e.Dernier_Parage.slice(0,10)
+                const prochainParage = e.Prochain_Parage.slice(0,10) 
+
                 const horse = new Horse(
                     e._id,
                     e.Nom,
                     e.Ecurie,
-                    e.Dernier_Parage,
-                    e.Prochain_Parage,
+                    dernierParage,
+                   prochainParage,
                     e.Paré
                 );
                 horseArray.push(horse);

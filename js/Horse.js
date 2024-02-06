@@ -18,13 +18,13 @@ export default class Horse {
             ${this.stable}
         </td>
         <td>
-        ${this.lastTrim}
+        <input type="date" value="${this.lastTrim}">
         </td>
         <td>
-        ${this.nextTrim}
+        <input type="date" value="${this.nextTrim}">
         </td>
         <td>
-            <input type="checkbox">
+            <input type="checkbox" disabled>
         </td>
     </tr>`
     }
