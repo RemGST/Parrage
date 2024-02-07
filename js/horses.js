@@ -72,6 +72,7 @@ function saveHorses() {
     btnEdit.classList.add("btnEdit");
 
     isEditing = false;
+    editHorse()
 }
 
 function getHorses() {
@@ -107,17 +108,17 @@ function renderTable() {
             "beforeend",
             `
         <tr>
-            <td>
+            <td class="horseName">
                 ${horse.name}
             </td>
-            <td>
+            <td class="horseStable">
                 ${horse.stable}
             </td>
             <td>
-            <input id="date" type="date" value="${horse.lastTrim}" disabled>
+            <input class="lastTrimDate" id="date" type="date" value="${horse.lastTrim}" disabled>
             </td>
             <td>
-            <input id="date" type="date" value="${horse.nextTrim}" disabled>
+            <input class="nextTrimDate" id="date" type="date" value="${horse.nextTrim}" disabled>
             </td>
             <td>
                 <input id="btnDone" type="checkbox" disabled>
@@ -192,6 +193,58 @@ function addHorse() {
             }
         })
     })
+}
+
+function editHorse(){
+    console.log("EDITING");
+        const table = document.getElementById("myTable");
+        const modifiedHorses = [];
+
+        for (let i = 1; i < table.rows.length; i++) {
+            const originalHorse = horseArray[i - 1]; // Assuming horseArray is synced with the table
+            console.log(originalHorse);
+            console.log(horseArray[i - 1].id);
+            const updatedHorse = {
+                id: horseArray[i - 1].id,
+                name: table.rows[i].cells[0].innerText,
+                stable: table.rows[i].cells[1].innerText,
+                lastTrim: table.rows[i].cells[2].querySelector('.lastTrimDate').value,
+                nextTrim: table.rows[i].cells[3].querySelector('.nextTrimDate').value,
+                trimmed: table.rows[i].cells[4].querySelector('#btnDone').checked,
+            };
+
+            // Compare original and updated horses
+            const isModified = Object.keys(updatedHorse).some(key => originalHorse[key] !== updatedHorse[key]);
+
+            if (isModified) {
+                modifiedHorses.push(updatedHorse);
+            }
+        }
+
+        console.log("Modified Horses:", modifiedHorses);
+        console.log(JSON.stringify(modifiedHorses));
+
+        // Now you can send the modified horses to the server
+        // Use fetch or your preferred method to send the data to your server
+        fetch("http://localhost:3000/updateHorses", {
+            method: "PUT",
+            body: JSON.stringify(modifiedHorses),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+    
+            if (data.status === "Updated") {
+                alert(data.message);
+            } else {
+                alert(data.message);
+            }
+        });
+
+    
+
 }
 
 getHorses();
