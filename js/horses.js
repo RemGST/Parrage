@@ -76,7 +76,7 @@ function saveHorses() {
 }
 
 function getHorses() {
-    fetch("http://localhost:3000/getHorses")
+    fetch("https://parage.onrender.com/getHorses")
         .then((result) => result.json())
         .then((res) => {
             console.log(res);
@@ -175,7 +175,7 @@ function addHorse() {
         console.log(JSON.stringify(horse));
 
 
-        fetch("http://localhost:3000/addHorses", {
+        fetch("https://parage.onrender.com/addHorses", {
             method: "POST",
             body: JSON.stringify(horse),
             headers: {
@@ -226,7 +226,7 @@ function editHorse(){
 
         // Now you can send the modified horses to the server
         // Use fetch or your preferred method to send the data to your server
-        fetch("http://localhost:3000/updateHorses", {
+        fetch("https://parage.onrender.com/updateHorses", {
             method: "PUT",
             body: JSON.stringify(modifiedHorses),
             headers: {
