@@ -76,7 +76,7 @@ function saveHorses() {
 }
 
 function getHorses() {
-    fetch("https://parage.onrender.com/getHorses")
+    fetch("https://parage.onrender.com/getHorses?origin=*")
         .then((result) => result.json())
         .then((res) => {
             console.log(res);
