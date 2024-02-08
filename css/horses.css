@@ -59,11 +59,7 @@ tr:nth-child(1){
 
 tr {
     background-color: white;
-    
   }
-
-  
-
 
 .btnEdit, .btnSave, .btnAdd, .btnSend {
     border: #0046E6 1px solid;
@@ -72,7 +68,11 @@ tr {
     font-size: 25px;
     height: fit-content;
     padding: 10px;
-    margin-left: 20px;
+    margin: 10px 0 0 100px;
+}
+
+.btnAdd{
+    margin-left: 10px;
 }
 
 .btnEdit:hover, .btnSave:hover, .btnAdd:hover, .btnSend:hover{
@@ -87,3 +87,39 @@ tr {
     display: flex;
     flex-direction: row;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .navbar{
+        padding: 10px 0px;
+        justify-content: space-evenly;
+    }
+
+    .navbar a{
+        margin-right: 0px;
+    }
+
+    .containerToDo{
+        margin: 10px;
+        padding: 0;
+        overflow-x:auto;
+        flex-wrap: wrap;
+    }
+
+    td,th{
+        font-size: 12px;
+    }
+
+    .btnEdit,
+    .btnAdd,.btnSend {
+        padding: 5px;
+        margin: 10px 10px ;
+    }
+
+    .addHorseContainer{
+        margin: 20px 10px 10px;
+        padding: 0;
+        overflow-x:auto;
+        display: flex;
+    }
+  }

@@ -155,10 +155,13 @@ function addHorse() {
         </td>
     </tr>
         </table>
+        
+    `  );
+    addHorseContainer.insertAdjacentHTML('afterend',`<a class="btnSend">Ajouter</a>
+    `);
 
-        <a class="btnSend">Ajouter</a>
-    `
-    );
+    btnAdd.removeEventListener('click',addHorse)
+  
 
     const btnSend = document.querySelector(".btnSend")
     btnSend.addEventListener("click", () => {
