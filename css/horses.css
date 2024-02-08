@@ -111,7 +111,7 @@ tr {
     }
 
     .btnEdit,
-    .btnAdd,.btnSend {
+    .btnAdd,.btnSend,.btnSave {
         padding: 5px;
         margin: 10px 10px ;
     }
